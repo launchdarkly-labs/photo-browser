@@ -1,6 +1,6 @@
 {
   "name": "unsplash-browser",
-  "description": "Sample application showing off LaunchDarkly used in a server-side-rendered single-page application",
+  "description": "Sample application showing off using LaunchDarkly in a server-side-rendered single page application",
   "keywords": [
     "feature flags",
     "feature toggles",
