@@ -10,7 +10,7 @@ export const fetchUser = (username) => ({
   }
 });
 
-export const fetchPhotos = (username, nextPage) => ({
+export const fetchUserPhotos = (username, nextPage) => ({
   username,
   [CALL_UNSPLASH]: {
     types: ['USER_PHOTOS_REQUEST', 'USER_PHOTOS_SUCCESS', 'USER_PHOTOS_FAILURE'],
@@ -46,4 +46,30 @@ export const fetchRandomPhoto = () => ({
     schema: schema.photo,
     skipIf: (state) => state.randomPhotoId
   }
+});
+
+export const fetchPhotos = (curated, nextPage) => ({
+  curated,
+  [CALL_UNSPLASH]: {
+    types: ['PHOTOS_REQUEST', 'PHOTOS_SUCCESS', 'PHOTOS_FAILURE'],
+    url: (state) => {
+      const {
+        nextPageUrl = curated ? '/photos/curated' : '/photos',
+      } = state.pagination.photos[curated ? 'curated' : 'all'] || {};
+
+      return nextPageUrl;
+    },
+    schema: schema.photoList,
+    skipIf: (state) => {
+      const { pageCount = 0 } = state.pagination.photos[curated ? 'curated' : 'all'] || {};
+      return pageCount > 0 && !nextPage;
+    }
+  }
+});
+
+export const fetchCuratedPhotos = (nextPage) => fetchPhotos(true, nextPage);
+
+export const updateFlags = (flags) => ({
+  type: 'UPDATE_FLAGS',
+  flags
 });

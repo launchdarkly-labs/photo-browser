@@ -1,48 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchUser, fetchUserPhotos } from '../actions';
+import { fetchCuratedPhotos } from '../actions';
 import Page from '../components/Page';
 import Nav from '../components/Nav';
-import Main from '../components/Main';
 import Loading from '../components/Loading';
-import User from '../components/User';
+import Main from '../components/Main';
 import Photo from '../components/Photo';
 import PaginatedList from '../components/PaginatedList';
 import { PrimaryButton } from '../components/Button';
 
-const loadData = ({ username, loadUser, loadPhotos }) => {
-  return Promise.all([
-    loadUser(username),
-    loadPhotos(username)
-  ]);
+const loadData = ({loadPhotos}) => {
+  return loadPhotos();
 };
 
-class UserPage extends React.Component {
-  static loadData({dispatch, getState}, {params}) {
+class CuratedPhotosPage extends React.Component {
+  static loadData({dispatch}) {
     return loadData({
-      username: params.username,
-      loadUser: (u) => dispatch(fetchUser(u)),
-      loadPhotos: (u) => dispatch(fetchUserPhotos(u))
+      loadPhotos: () => dispatch(fetchCuratedPhotos())
     });
   };
 
   componentWillMount() {
     loadData({
-      username: this.props.username,
-      loadUser: this.props.fetchUser,
-      loadPhotos: this.props.fetchUserPhotos
+      loadPhotos: this.props.fetchCuratedPhotos
     });
   }
 
   render() {
-    const { username, user, photos, photoPagination, fetchUserPhotos } = this.props;
-
-    if (!user) {
-      return (
-        <Loading>Loading profile…</Loading>
-      );
-    }
+    const { photos, photoPagination } = this.props;
 
     return (
       <Page>
@@ -60,7 +46,7 @@ class UserPage extends React.Component {
             renderPagination={({isFetching}) => (
               <div className="tc pa4">
                 <PrimaryButton
-                  onClick={() => fetchUserPhotos(username, true)}
+                  onClick={() => this.props.fetchCuratedPhotos(true)}
                   disabled={isFetching}
                 >
                   {isFetching ? 'loading…' : 'load more'}
@@ -85,25 +71,20 @@ class UserPage extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-  const username = props.params.username;
-
   const {
-    entities: { users, photos },
-    pagination: { photosByUser }
+    entities: { photos },
+    pagination
   } = state;
 
-  const userPhotoPagination = photosByUser[username] || { ids: [] };
-  const userPhotos = userPhotoPagination.ids.map(id => photos[id]);
+  const curatedPagination = pagination.photos.curated || { ids: [] };
+  const curatedPhotos = curatedPagination.ids.map(id => photos[id]);
 
   return {
-    username,
-    user: users[username],
-    photos: userPhotos,
-    photoPagination: userPhotoPagination
+    photos: curatedPhotos,
+    photoPagination: curatedPagination
   };
 };
 
 export default connect(mapStateToProps, {
-  fetchUser,
-  fetchUserPhotos
-})(UserPage);
+  fetchCuratedPhotos
+})(CuratedPhotosPage);

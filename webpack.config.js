@@ -1,9 +1,11 @@
+require('dotenv').config();
+
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  watch: true,
   entry: [
+    './src/styles.css',
     './client.js'
   ],
   output: {
@@ -12,7 +14,10 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'UNSPLASH_APP_ID': JSON.stringify(process.env.UNSPLASH_APP_ID)
+        'UNSPLASH_APP_ID': JSON.stringify(process.env.UNSPLASH_APP_ID),
+        'LAUNCHDARKLY_SDK_KEY': JSON.stringify(process.env.LAUNCHDARKLY_SDK_KEY),
+        'LAUNCHDARKLY_ENV_ID': JSON.stringify(process.env.LAUNCHDARKLY_ENV_ID),
+        'EXAMPLE_USER_KEY': JSON.stringify(process.env.EXAMPLE_USER_KEY)
       }
     }),
     new ExtractTextPlugin('./dist/styles.css'),
@@ -22,7 +27,16 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
-        use: 'babel-loader'
+        use: {
+          loader: 'babel-loader',
+          query: {
+            presets: [
+              'babel-preset-es2015',
+              'babel-preset-react',
+              'babel-preset-stage-0',
+            ].map(require.resolve),
+          }
+        }
       },
       {
         test: /\.css$/,

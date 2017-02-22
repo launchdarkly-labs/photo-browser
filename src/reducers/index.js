@@ -18,6 +18,12 @@ const pagination = combineReducers({
   photosByUser: paginate({
     mapActionToKey: (action) => action.username,
     types: ['USER_PHOTOS_REQUEST', 'USER_PHOTOS_SUCCESS', 'USER_PHOTOS_FAILURE']
+  }),
+  photos: paginate({
+    mapActionToKey: (action) => {
+      return action.curated ? 'curated' : 'all'
+    },
+    types: ['PHOTOS_REQUEST', 'PHOTOS_SUCCESS', 'PHOTOS_FAILURE']
   })
 });
 
@@ -40,9 +46,19 @@ const serverError = (state = null, action) => {
   return state;
 };
 
+const flags = (state = {}, action) => {
+  switch(action.type) {
+    case 'UPDATE_FLAGS':
+      return action.flags;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   entities,
   pagination,
   randomPhotoId,
-  serverError
+  serverError,
+  flags
 });

@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import ServerError from '../components/ServerError';
 
-import '../styles.css';
-
 const App = ({ serverError, children }) => (
   <div>
     {serverError

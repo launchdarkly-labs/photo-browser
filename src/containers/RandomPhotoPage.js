@@ -4,18 +4,22 @@ import { Link } from 'react-router';
 
 import { fetchRandomPhoto } from '../actions';
 import Page from '../components/Page';
-import Header from '../components/Header';
+import Nav from '../components/Nav';
 import Loading from '../components/Loading';
 import User from '../components/User';
 import { Home, Heart } from '../components/icon';
 
 const loadData = ({ loadPhoto }) => {
-  loadPhoto().catch(() => {
-    console.log('Failed to load data');
-  });
+  return loadPhoto();
 };
 
 class RandomPhotoPage extends React.Component {
+  static loadData({dispatch}) {
+    return loadData({
+      loadPhoto: () => dispatch(fetchRandomPhoto())
+    });
+  };
+
   componentWillMount() {
     loadData({
       loadPhoto: this.props.fetchRandomPhoto
@@ -38,10 +42,7 @@ class RandomPhotoPage extends React.Component {
           background: `${photo.color} url(${photo.urls.regular}) no-repeat center`
         }}
       >
-        <Header>
-          <Link to="/" className="mr2 mr3-m mr4-l f6 fw6 link dim white">Home</Link>
-          <Link to="/curated" className="mr2 mr3-m mr4-l f6 fw6 link dim white">Curated photos</Link>
-        </Header>
+        <Nav />
 
         <div
           className="absolute left-0 bottom-0 w-100 flex items-center justify-between pv2 ph4 tc bg-black-40"
