@@ -5,14 +5,12 @@ import { Link } from 'react-router';
 import { fetchUser, fetchPhotos } from '../actions';
 import Page from '../components/Page';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Main from '../components/Main';
 import Loading from '../components/Loading';
 import User from '../components/User';
 import Photo from '../components/Photo';
 import PaginatedList from '../components/PaginatedList';
 import { PrimaryButton } from '../components/Button';
-import { Home } from '../components/icon';
 
 const loadData = ({ username, loadUser, loadPhotos }) => {
   Promise.all([
@@ -44,7 +42,8 @@ class UserPage extends React.Component {
     return (
       <Page>
         <Header>
-          <Link to="/" className="link dim white"><Home size="tiny" /></Link> › <User user={user} />
+          <Link to="/" className="mr2 mr3-m mr4-l f6 fw6 link dim white">Home</Link>
+          <User user={user} />
         </Header>
         <Main>
           <PaginatedList

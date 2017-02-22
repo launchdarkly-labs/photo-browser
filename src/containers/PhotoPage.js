@@ -7,7 +7,7 @@ import Page from '../components/Page';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import User from '../components/User';
-import { Home, Heart } from '../components/icon';
+import { Heart } from '../components/icon';
 
 const loadData = ({ photoId, loadPhoto }) => {
   loadPhoto(photoId).catch(() => {
@@ -40,7 +40,8 @@ class PhotoPage extends React.Component {
         }}
       >
         <Header>
-          <Link to="/" className="link dim white"><Home size="tiny" /></Link> › <User user={user} />
+          <Link to="/" className="mr2 mr3-m mr4-l f6 fw6 link dim white">Home</Link>
+          <User user={user} />
         </Header>
 
         <div

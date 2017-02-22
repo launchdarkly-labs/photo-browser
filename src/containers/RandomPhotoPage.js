@@ -39,7 +39,8 @@ class RandomPhotoPage extends React.Component {
         }}
       >
         <Header>
-          <Link to="/" className="link dim white"><Home size="tiny" /></Link>
+          <Link to="/" className="mr2 mr3-m mr4-l f6 fw6 link dim white">Home</Link>
+          <Link to="/curated" className="mr2 mr3-m mr4-l f6 fw6 link dim white">Curated photos</Link>
         </Header>
 
         <div
