@@ -2,13 +2,16 @@
 
 ## Installation
 
-To run this application you will need to register
-as a developer on [Unsplash](https://unsplash.com/developers).
+First, [signup for LaunchDarkly](https://app.launchdarkly.com/signup). You will need an SDK key and
+and environment ID. You can find both [in your account settings](https://app.launchdarkly.com/settings#/projects).
 
-Once you've signed up and created an application, you can run
-the application like so:
+Sign up for Unsplash, and [create a developer account](https://unsplash.com/developers).
 
-```
-yarn install
-UNSPLASH_APP_ID=YOUR_APP_ID yarn start
+Now copy `.env.example` to `.env`, and fill in the required settings.
+
+And start the application,
+
+```js
+yarn install // only once
+yarn start
 ```
