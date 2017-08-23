@@ -16,7 +16,7 @@ module.exports = {
       'process.env': {
         'UNSPLASH_APP_ID': JSON.stringify(process.env.UNSPLASH_APP_ID),
         'LAUNCHDARKLY_SDK_KEY': JSON.stringify(process.env.LAUNCHDARKLY_SDK_KEY),
-        'LAUNCHDARKLY_ENV_ID': JSON.stringify(process.env.LAUNCHDARKLY_ENV_ID),
+        'LAUNCHDARKLY_CLIENTSIDE_ID': JSON.stringify(process.env.LAUNCHDARKLY_CLIENTSIDE_ID),
         'EXAMPLE_USER_KEY': JSON.stringify(process.env.EXAMPLE_USER_KEY)
       }
     }),

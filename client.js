@@ -12,7 +12,7 @@ import { updateFlags } from './src/actions';
 
 const store = window.store = createStore(window.state.store);
 
-const ldClient = LDClient.initialize(process.env.LAUNCHDARKLY_ENV_ID, { key: process.env.EXAMPLE_USER_KEY }, {
+const ldClient = LDClient.initialize(process.env.LAUNCHDARKLY_CLIENTSIDE_ID, { key: process.env.EXAMPLE_USER_KEY }, {
   bootstrap: window.state.flags
 });
 
