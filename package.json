@@ -34,6 +34,8 @@
     "express": "^4.14.1",
     "humps": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
+    "ldclient-js": "^1.1.12",
+    "ldclient-node": "^3.0.15",
     "lodash": "^4.17.4",
     "normalizr": "^3.2.1",
     "octicons": "^5.0.1",
