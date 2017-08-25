@@ -21,8 +21,13 @@ Also, make sure you are signed up for the following services:
 Duplicate or rename .env.example to .env and fill out each of the environmental variables
 
 ```UNSPLASH_APP_ID``` can be found in your Unspash dashboard
+
 ```LAUNCHDARKLY_SDK_KEY``` and ```LAUNCHDARKLY_CLIENTSIDE_ID``` can be found [in your LaunchDarkly account settings](https://app.launchdarkly.com/settings#/projects).
-```EXAMPLE_USER_KEY``` is a json object describing a user object. More info on the user object [here](https://docs.launchdarkly.com/v2.0/docs/node-sdk-reference#section-users)
+
+```EXAMPLE_USER_KEY``` is the test users key
+
+
+```EXAMPLE_USER_CUSTOM_JSON``` is an optional json object containing custom attributes for experimenting with targeting. If the json is malformed the server will output a warning, but will still start.
 
 ## Running
 And start the application:

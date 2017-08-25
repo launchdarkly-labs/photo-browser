@@ -42,6 +42,14 @@ const prerender = (req, res, store) => {
   const user = {
     key: process.env.EXAMPLE_USER_KEY
   };
+
+  if(process.env.EXAMPLE_USER_CUSTOM_JSON) {
+    try {
+      user.custom = JSON.parse(process.env.EXAMPLE_USER_CUSTOM_JSON);
+    } catch(e) {
+      console.log("Unable to parse env variable EXAMPLE_USER_CUSTOM_JSON: ", process.env.EXAMPLE_USER_CUSTOM_JSON, e);
+    }
+  }
   
   getFlags(user).then(
     (flags) => {
