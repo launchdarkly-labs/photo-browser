@@ -47,7 +47,7 @@ const prerender = (req, res, store) => {
     try {
       user.custom = JSON.parse(process.env.EXAMPLE_USER_CUSTOM_JSON);
     } catch(e) {
-      console.log("Unable to parse env variable EXAMPLE_USER_CUSTOM_JSON: ", process.env.EXAMPLE_USER_CUSTOM_JSON, e);
+      console.log("Unable to parse env variable EXAMPLE_USER_CUSTOM_JSON:", process.env.EXAMPLE_USER_CUSTOM_JSON, e);
     }
   }
   
