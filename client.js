@@ -11,8 +11,9 @@ import createStore from './src/store';
 import { updateFlags } from './src/actions';
 
 const store = window.store = createStore(window.state.store);
+const user = window.user = window.state.user;
 
-const ldClient = LDClient.initialize(process.env.LAUNCHDARKLY_CLIENTSIDE_ID, { key: process.env.EXAMPLE_USER_KEY }, {
+const ldClient = LDClient.initialize(process.env.LAUNCHDARKLY_CLIENTSIDE_ID, user, {
   bootstrap: window.state.flags
 });
 
